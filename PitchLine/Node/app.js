@@ -57,7 +57,16 @@ app.get("/ajaxCheckUser",function(req,resp){
 })
 
 app.get("/Signupajax",function(req,resp){
-    
+    var dataAry=[req.query.mailkuch,req.query.pwdkuch,req.query.typekuch];
 
+    dbCtrl.query("insert into USERS values(?,?,?,current_date())",[dataAry],function(err,result){
+        if(err)
+        {
+            resp.send(err);
+        }
+        else
+        resp.send("Record Saved succefully");
+    });
+    
 })
 
