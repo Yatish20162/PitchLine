@@ -58,8 +58,8 @@ app.get("/ajaxCheckUser",function(req,resp){
 
 app.get("/Signupajax",function(req,resp){
     var dataAry=[req.query.mailkuch,req.query.pwdkuch,req.query.typekuch];
-
-    dbCtrl.query("insert into USERS values(?,?,?,current_date())",[dataAry],function(err,result){
+    console.log("entered signupajax");
+    dbCtrl.query("insert into USERS values(?,?,?,current_date())",dataAry,function(err,result){
         if(err)
         {
             resp.send(err);
@@ -67,6 +67,22 @@ app.get("/Signupajax",function(req,resp){
         else
         resp.send("Record Saved succefully");
     });
-    
+})
+
+app.get("/loginajax",function(req,resp){
+    var dataAry=[req.query.emailkuch,req.query.pwdkuch];
+    dbCtrl.query("select utype from USERS where email=? and pwd=?",dataAry,function(err,result){
+        if(err)
+        resp.send(err);
+
+        if(result.length==0)
+        {
+            resp.send("Invalid ID");
+        }
+        else
+        {
+            resp.send(" Login Succefull ,  Welcome" + result[2].utype);
+        }
+    })
 })
 
