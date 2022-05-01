@@ -15,6 +15,7 @@ app.listen(8000,()=>{
 })
 
 
+
 app.get("/",function(req,resp){
     // console.log(process.cwd());
     resp.sendFile(process.cwd() + "/public/HTML/index.html");
