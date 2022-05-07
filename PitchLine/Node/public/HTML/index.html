@@ -15,17 +15,29 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 
-
-
     <script>
         $(document).ready(function () {
+
+            // Check availability of mail ---------------------------
+            // ------------------------------------------------------
+
             $("#mail").blur(function () {
                 var Mail = $(this).val();
                 var urlWithData = "/ajaxCheckUser?mail=" + Mail;
                 $.get(urlWithData, function (response) {
-                    $("#respServer").html(response);
+                    if (response == "Available") {
+                        $(".respServer").html(response);
+                    }
+                    else {
+                        $("#Server").removeClass("respServer").addClass("RrespServer");
+                        $(".RrespServer").html(response);
+                    }
                 });
             });
+
+
+            // Ajax Request on Signup Page -----------------------------
+            // ---------------------------------------------------------
 
             $("#Sbtn").click(function () {
                 var email = $("#mail").val();
@@ -34,30 +46,66 @@
                 alert(email);
                 alert(pwd);
                 alert(type);
-                var urlWithData = "/Signupajax?mailkuch=" + email + "&pwdkuch" + pwd + "&typekuch" + type;
+                var urlWithData = "/Signupajax?mailkuch=" + email + "&pwdkuch=" + pwd + "&typekuch=" + type;
                 $.get(urlWithData, function (response) {
                     alert("wlcm back");
-                    $("#sreversub").html(response);
-                })
+                    $(".sreversub").html(response);
+                });
             });
 
-            $("#Lbtn").click(function(){
-                alert();
-                var email = ("#Lmail").val();
-                var pwd = ("$Lpwd").val();
-                alert(email);
-                alert(pwd);
 
+            // Ajax Request on Login ---------------------------------------
+            // ---------------------------------------------------------
+            $("#Lbtn").click(function () {
+                var email = $("#Lmail").val();
+                var pwd = $("#Lpwd").val();
                 var urlwithdata = "/loginajax?emailkuch" + email + "&pwdkuch" + pwd;
                 $.get(urlwithdata, function (response) {
                     alert("Login cnfirmed");
-                    $("lserversub").html(response);
-                })
+                    $("#lserversub").html(response);
+                });
+            });
 
+            // validations on Email---------------------------------------
+            //  -----------------------------------------------------------
+
+            $("#mail").blur(function () {
+                var exp = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+                var eid = $(this).val();
+
+                if (exp.test(eid) == true) {
+                    $("#validate").html("Valid");
+                }
+                else {
+                    $("#validate").html("InValid");
+                }
             })
+
+            //         $("#pwd").blur(function () {
+            //             var exp =/(?=^.{8,}$)(?=.\d)(?=.[!@#$%^&]+)(?![.\n])(?=.[A-Z])(?=.[a-z]).$/;
+
+            //             if (exp.test(pswd) == true){
+            //             $("#errPwd").html("Strong Password");
+            //                 pwdvalidate=true;
+            //             }
+            //             else
+            //             $("#errPwd").html("Invalid fromat of password");
+            //   });
+
+            //   var bt=document.getElementById("Sbtn");
+
+            //         if(emailvaidate)
+            //         {
+            //             bt.disabled=false;
+            //         }
+            //         else
+            //         {
+            //             bt.disabled=true;
+            //         }
+
+
         });
     </script>
-
 </head>
 
 <body>
@@ -72,11 +120,16 @@
                     Signup
                 </button>
             </div>
-        </div>
+            
         </div>
     </nav>
 
+    <div class="container-fluid">
+        <a href="/shark-profile">Shark Profile</a>
+    </div>
+
     <!-- Signup-> Modal -->
+
     <div class="modal fade" id="x" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -88,21 +141,30 @@
                 <div class="modal-body">
                     <form>
                         <h1>SIGNUP</h1>
+
+                        <p id="Server">
+                            <span class="respServer"> * </span>
+                        </p>
+
                         <p>
                             <input type="email" placeholder="Email" id="mail">
-                            <span id="respServer"> * </span>
+                            <span id="validate"> * </span>
                         </p>
-                        <input type="password" placeholder="Password" id="pwd">
 
-                        <input type="text" list="tp" placeholder="Select">
-                        <datalist id="tp">
-                            <option>Shark</option>
-                            <option>Founder</option>
-                        </datalist>
+                        <p>
+                            <input type="password" placeholder="Password" id="pwd">
+                            <!-- <span id="errPwd">*</span> -->
+                        </p>
+
+                        <select id="tp">
+                            <option value="shark">Shark</option>
+                            <option value="founder">Founder</option>
+                        </select>
                         <p>
                             <input type="button" value="Signup" id="Sbtn">
                             <span id="sreversub">*</span>
                         </p>
+
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -141,9 +203,7 @@
                 </div>
             </div>
         </div>
-
-
-
+    </div>
 </body>
 
 </html>

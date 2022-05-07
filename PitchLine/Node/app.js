@@ -8,7 +8,8 @@ var app=express();
 
 // this line is added to add js and css to the file 
 app.use(express.static("public"));
-
+app.use(express.urlencoded('extended:true'));
+app.use(fileuploader());
 
 app.listen(8000,()=>{
     console.log("server started");
@@ -38,7 +39,9 @@ dbCtrl.connect(function(err){
 app.get("/",function(req,resp){
     resp.sendFile(process.cwd() + "/public/HTML/index.html");
 })
-
+app.get("/shark-profile",function(req,resp){
+    resp.sendFile(process.cwd() + "/public/HTML/shark_profile.html");
+})
 
 app.get("/ajaxCheckUser",function(req,resp){
     console.log(req.query.mail);
@@ -71,6 +74,7 @@ app.get("/Signupajax",function(req,resp){
 
 app.get("/loginajax",function(req,resp){
     var dataAry=[req.query.emailkuch,req.query.pwdkuch];
+    console.log("entered loginajax");
     dbCtrl.query("select utype from USERS where email=? and pwd=?",dataAry,function(err,result){
         if(err)
         resp.send(err);
@@ -81,8 +85,16 @@ app.get("/loginajax",function(req,resp){
         }
         else
         {
-            resp.send(" Login Succefull ,  Welcome" + result[2].utype);
+            resp.send(" Login Succefull ");
         }
     })
+})
+
+// ----- Shark Profile Save, update, Fetch ................//
+// --------------------------------------------------------//
+
+app.post("/shark/Save-profile",function(req,resp){
+    console.log(req.body.txtemail);
+    // dataAry=[]
 })
 

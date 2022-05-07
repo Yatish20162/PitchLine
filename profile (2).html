@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/jquery-1.8.2.min.js"></script>
+
+    <title>Document</title>
+    <script>
+        $(document).ready(function(){
+            $("#txtUid").blur(function(){
+                var userId=$(this).val();
+               
+                //AJAX Request- Asynchronous Java Script and XML
+
+                //$.get(urlWithQueryString,callbackFunction(response){})
+                var urlWithData="/ajaxCheckUser?uidKuch="+userId;
+                $.get(urlWithData,function(response){
+                        //alert(response);
+                        $("#respServer").html(response);
+                });
+
+            });
+            //-------------------
+            $(document).ajaxStart(function(){
+                $("#wait").css("display","inline");//show
+            });
+
+            $(document).ajaxStop(function(){
+                $("#wait").css("display","none");//hide
+            });
+        //-------------------------
+        $("#btnSearch").click(function(){
+            //alert();
+            var userid=$("#txtUid").val();
+            var urlWithData="/JSONserachRecord?uidKuch="+userid;
+            $.getJSON(urlWithData,function(resposeJSONAry) //max:1   min:0
+            {
+                    
+                    if(resposeJSONAry.length==0)
+                    alert("Invalid id"); //0 record
+                    else
+                    {
+                        alert(JSON.stringify(resposeJSONAry));//1 record
+                        $("#txtName").val(resposeJSONAry[0].name);//table me se col wale 
+                        $("#txtMob").val(resposeJSONAry[0].mobile);
+                        $("#picPrev").attr("src","/uploads/"+resposeJSONAry[0].picname);
+                        $("#oldPic").val(resposeJSONAry[0].picname);
+
+                    }
+            })
+
+        });
+
+        });
+    </script>
+    <style>
+        #wait{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <form  name="frm Profile" method="post" enctype="multipart/form-data" >
+            <input type="hidden" id="oldPic" name="oldPic">
+            <p>
+                <span id="respServer">*</span>
+            </p>
+          
+           <h1>Profile</h1>
+          
+           <p>
+                Uid<input type="text" placeholder="User id" name="txtUid" value="rajesh" id="txtUid" > 
+                <input type="button" value="search" id="btnSearch">
+          </p>
+
+           <p> Name<input type="text" placeholder="Password"  name="txtName" id="txtName"></p>
+           <p> Mobile<input type="text" placeholder="Mobile"    name="txtMob" id="txtMob"></p>
+           Profile Pic<input type="file" name="profilePic">
+           <p>
+               <img src="" alt="" id="picPrev" width="100" height="100">
+           </p>
+           <p>
+               <input type="submit" value="Save" formaction="/profile-save">
+               <input type="submit" value="delete" formaction="/profile-delete-post">
+               <input type="submit" value="Show All Records" formaction="/showAll">
+               <input type="submit" value="Update" formaction="/profile-update">
+               
+
+           </p>
+        </form>
+        <img src="pics/loading9.gif" id="wait">
+        </center>
+</body>
+</html>
