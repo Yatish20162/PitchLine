@@ -9,13 +9,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="../CSS/shark_profile.css">
+    <script src="../JS/jquery-1.8.2.min.js"></script>
+
+    <script>
+
+    </script>
 </head>
 
 <body>
     <div class="Form" >
         <form enctype="multipart/form-data" method="post">
-            <input type="hidden" name="profile-pic" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            <input type="hidden" name="aadhar pic"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input type="hidden" name="profilepic" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input type="hidden" name="aadharpic"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             <H1> Profile</H1>
             <!-- Email -->
             <div class="mb-3">
@@ -26,62 +31,64 @@
             <!-- Name -->
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Name</label>
-                <input type="text" name="txt-name" class="form-control" id="exampleInputPassword1">
+                <input type="text" name="txtname" class="form-control" id="exampleInputPassword1">
             </div>
             <!-- Contact -->
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Contact No.</label>
-                <input type="text" name="txt-contact" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="text" name="txtcontact" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
             <!-- Address -->
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Address</label>
-                <input type="text" name="txt-Address" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="text" name="txtaddress" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
             <!-- Occupations -->
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Occupations</label>
-                <input type="text" name="txt-occupations" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="text" name="txtoccupations" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
             <!-- City  -->
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">City</label>
-                <input type="text" name="txt-city" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="text" name="txtcity" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
              <!-- Profile Pic -->
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Profile Pic</label>
-                <input type="file" name="profile-pic" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="file" name="profilepic" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
             <!-- Aadhar Pic -->
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Aadhar Pic</label>
-                <input type="file" name="aadhar pic" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="file" name="aadharpic" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
             <!-- categories -->
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Categories</label>
-                <select class="form-select" multiple aria-label="multiple select example" name="txt-categories">
+                <select class="form-select" aria-label="Default select example">
                     <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="IT">IT</option>
+                    <option value="PHARMA">PHARMA</option>
+                    <option value="Mechanical">Mechanical</option>
+                    <option value="Food">Food</option>
+                    <option value="Electronic">Electronic</option>
                   </select>
             </div>
             <!-- comapines -->
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Companies invested(approx.)</label>
-                <input type="number" name="txt-companies" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="number" name="txtcompanies" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
             <!-- Amount -->
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Amount invested(approx.)</label>
-                <input type="text" name="txt-amount" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="text" name="txtamount" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
             <!-- other -->
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Other Info.</label>
-                <input type="text" name="txt-other" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
+                <input type="text" name="txtother" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
             </div>
             
         

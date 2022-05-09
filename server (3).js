@@ -148,8 +148,8 @@ var newName="nopic.png";
     if(req.files!=null)
     {
         newName=req.body.txtUid+"-"+req.files.profilePic.name;
-       var des=process.cwd()+"/public/uploads/"+newName;
-     req.files.profilePic.mv(des, function(err)
+        var des=process.cwd()+"/public/uploads/"+newName;
+        req.files.profilePic.mv(des, function(err)
         {
          if(err)
                console.log(err);

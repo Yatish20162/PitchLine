@@ -94,7 +94,114 @@ app.get("/loginajax",function(req,resp){
 // --------------------------------------------------------//
 
 app.post("/shark/Save-profile",function(req,resp){
+
     console.log(req.body.txtemail);
-    // dataAry=[]
+    console.log(req.body.txtname);
+
+
+    var profilename="../Node/public/Pics/pexels-matt-hardy-3560168.jpg";
+    var aadharname="../Node/public/Pics/pexels-matt-hardy-3560168.jpg";
+
+    if(req.files.profilepic!=null)
+    {
+        profilename=req.body.profilepic.name;
+        var des=process.cwd()+"/public/uploads/"+profilename;
+        req.files.profilepic.mv(des,function(err){
+            if(err)
+                console.log(err);
+            else
+            console.log("Profile pic uploaded successfully ");
+        })
+    }
+
+    if(req.files.aadharpic!=null)
+    {
+        aadharname=req.body.aadharpic.name;
+        var des=process.cwd()+"/public/uploads/"+aadharname;
+        req.files.aadharpic.mv(des,function(err){
+            if(err)
+                console.log(err);
+            else
+            console.log("aadhar pic uploaded successfully ");
+        })
+    }
+
+    console.log(req.body.txtemail);
+    console.log(req.body.txtname);
+
+    dataAry=[req.body.txtemail,req.body.txtname,
+    req.body.txtcontact,req.body.txtaddress,req.body.txtoccupations,req.body.txtcity,profilename,
+    aadharname,req.body.txtcategories,req.body.txtcompanies,
+    req.body.txtamount,req.body.txtother];
+
+    console.log(dataAry);
+
+    dbCtrl.query("insert into sharkprofile values(?,?,?,?,?,?,?,?,?,?,?,?)",dataAry,function(err){
+        if(err)
+        {
+            resp.send(err);
+        }
+        else
+        {
+            resp.send("Recored Saved successfully !!!!!!");
+        }
+    })
 })
 
+app.post("shark/update-profile",function(req,resp){
+    var profilename;
+    var aadharname;
+    if(req.body.profilepic==null)
+    {
+        profilename=req.body.profilepic;
+    }
+    if(req.body.aadharpic==null)
+    {
+        aadharname=req.body.aadharpic;
+    }
+    if(req.files.profilepic!=null)
+    {
+        profilename=req.body.profilepic.name;
+        var des=process.cwd()+"/public/uploads/"+profilename;
+        req.files.profilepic.mv(des,function(err){
+            if(err)
+                console.log(err);
+            else
+            console.log("Profile pic updated successfully ");
+        })
+    }
+
+    if(req.files.aadharpic!=null)
+    {
+        aadharname=req.body.aadharpic.name;
+        var des=process.cwd()+"/public/uploads/"+aadharname;
+        req.files.aadharpic.mv(des,function(err){
+            if(err)
+                console.log(err);
+            else
+            console.log("aadhar pic updated successfully ");
+        })
+    }
+
+    dataAry=[req.body.txtname,
+        req.body.txtcontact,req.body.txtaddress,req.body.txtoccupations,req.body.txtcity,profilename,
+        aadharname,req.body.txtcategories,req.body.txtcompanies,
+        req.body.txtamount,req.body.txtother,req.body.txtemail,];
+    
+        console.log(dataAry);
+    
+        dbCtrl.query("update sharkprofile set pname=?,contact=?,Address=?,occupation=?,City=?,Profilepic=?,Aadharpic=?,categories=?,company=?,amount=?,Additional=? where email=?",dataAry,function(err){
+            if(err)
+            {
+                resp.send(err);
+            }
+            else
+            {
+                resp.send("Recored updated successfully !!!!!!");
+            }
+        })
+})
+
+app.get("/ajaxfetch",function(req,resp){
+
+})
