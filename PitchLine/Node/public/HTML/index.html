@@ -56,10 +56,11 @@
 
             // Ajax Request on Login ---------------------------------------
             // ---------------------------------------------------------
+
             $("#Lbtn").click(function () {
                 var email = $("#Lmail").val();
                 var pwd = $("#Lpwd").val();
-                var urlwithdata = "/loginajax?emailkuch" + email + "&pwdkuch" + pwd;
+                var urlwithdata = "/loginajax?emailkuch=" + email + "&pwdkuch=" + pwd;
                 $.get(urlwithdata, function (response) {
                     alert("Login cnfirmed");
                     $("#lserversub").html(response);
@@ -120,7 +121,6 @@
                     Signup
                 </button>
             </div>
-            
         </div>
     </nav>
 
@@ -204,6 +204,7 @@
             </div>
         </div>
     </div>
+
 </body>
 
 </html>
