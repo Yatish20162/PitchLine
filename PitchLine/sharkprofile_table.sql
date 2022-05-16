@@ -9,10 +9,11 @@ create table sharkprofile(
     Profilepic varchar(50),
     Aadharpic varchar(50),
     categories varchar(50),
-    company varchar(50),
-    amount varchar(50),
-    Additional varchar(50)
+    companycount int,
+    amount int,
+    Additional varchar(100)
 );
+drop table sharkprofile;
 select * from sharkprofile;
 truncate table sharkprofile;
 

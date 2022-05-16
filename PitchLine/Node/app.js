@@ -42,6 +42,13 @@ app.get("/",function(req,resp){
 app.get("/shark-profile",function(req,resp){
     resp.sendFile(process.cwd() + "/public/HTML/shark_profile.html");
 })
+app.get("/founder-profile",function(req,resp){
+    resp.sendFile(process.cwd() + "/public/HTML/founder_profile.html");
+})
+
+app.get("/shark-dashborad",function(req,resp){
+    resp.sendFile(process.cwd() +"/public/HTML/sharkdashboard.html");
+})
 
 app.get("/ajaxCheckUser",function(req,resp){
     console.log(req.query.mail);
@@ -227,4 +234,19 @@ app.get("/JSONsearchrecord",function(req,resp){
         resp.send(result);
     })
 
+})
+
+// Shark Dashboard Save investments
+
+app.post("/shark/Investment-Save",function(req,resp){
+    console.log("jkbkj");
+    dataAry=[req.body.mail,req.body.cmp,req.body.amount,req.body.txtarea];
+    console.log(dataAry);
+
+    dbCtrl.query("insert into  investments values(?,?,?,?)",dataAry,function(err){
+        if(err)
+        resp.send(err);
+        else
+        resp.send("Record Saved");
+    })
 })
