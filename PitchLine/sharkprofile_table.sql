@@ -13,6 +13,9 @@ create table sharkprofile(
     amount int,
     Additional varchar(100)
 );
+ALTER TABLE sharkprofile
+ADD PRIMARY KEY (email);
+
 drop table sharkprofile;
 select * from sharkprofile;
 truncate table sharkprofile;

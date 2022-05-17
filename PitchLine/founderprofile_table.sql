@@ -14,6 +14,8 @@ create table founderprofile(
     evaluation int,
     Additional varchar(100)
 );
+ALTER TABLE founderprofile
+ADD PRIMARY KEY (email);
 
 select * from founderprofile;
 truncate table founderprofile;

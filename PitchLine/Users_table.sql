@@ -7,6 +7,8 @@ create table USERS(
     utype varchar(10),
     dos date
 );
+ALTER TABLE USERS
+ADD PRIMARY KEY (email);
 drop table USERS;
 select * from USERS;
 truncate table USERS;
