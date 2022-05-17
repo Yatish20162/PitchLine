@@ -168,19 +168,19 @@ app.post("/shark/update-profile",function(req,resp){
 
     var profilename;
     var aadharname;
-    if(req.body.profilepic==null)
+    if(req.files.profilepic==null)
     {
-        profilename=req.body.profilepic;
+        profilename=req.files.profilepic.name;
     }
-    if(req.body.aadharpic==null)
+    if(req.files.aadharpic==null)
     {
-        aadharname=req.body.aadharpic;
+        aadharname=req.files.aadharpic.name;
     }
 
 
     if(req.files.profilepic!=null)
     {
-        profilename=req.body.profilepic.name;
+        profilename=req.files.profilepic.name;
         var des=process.cwd()+"/public/uploads/"+profilename;
         req.files.profilepic.mv(des,function(err){
             if(err)
@@ -192,7 +192,7 @@ app.post("/shark/update-profile",function(req,resp){
 
     if(req.files.aadharpic!=null)
     {
-        aadharname=req.body.aadharpic.name;
+        aadharname=req.files.aadharpic.name;
         var des=process.cwd()+"/public/uploads/"+aadharname;
         req.files.aadharpic.mv(des,function(err){
             if(err)
@@ -257,6 +257,120 @@ app.post("/shark/Investment-Save",function(req,resp){
 
 // ----- founder Profile Save, update, Fetch ................//
 // --------------------------------------------------------//
+
+app.post("/founder/Save-profile",function(req,resp){
+    
+    var profilename="pexels-matt-hardy-3560168.jpg";
+    var aadharname="pexels-matt-hardy-3560168.jpg";
+
+    if(req.files.profilepic!=null)
+    {
+        profilename=req.files.profilepic.name;
+        var des=process.cwd() + "/public/uploads"+ profilename;
+        req.files.profilepic.mv(des,function(err){
+            if(err)
+            console.log(err);
+            else
+            console.log("profile Pic uploaded");
+        })
+    }
+    
+    if(req.files.aadharpic!=null)
+    {
+         aadharname=req.files.aadharpic.name;
+        var des=process.cwd() + "/public/uploads" + aadharname;
+        req.files.aadharpic.mv(des,function(err){
+            if(err)
+            console.log(err);
+            else
+            console.log("Aadhar Pic uploaded");
+        })
+    }
+
+    dataAry=[req.body.txtemail,req.body.txtname,req.body.txtcontact,req.body.txtaddress,
+    req.body.txtcity,profilename,aadharname,req.body.txtcompanies,req.body.txtestdin,
+    req.body.txtsales,req.body.txtpartner,req.body.txtevaluation,req.body.txtother];
+
+    dbCtrl.query("insert into founderprofile  values(?,?,?,?,?,?,?,?,?,?,?,?,?)",dataAry,function(err){
+        if(err)
+        resp.send(err);
+        else
+        resp.send("Founder Record Saved");
+    })
+})
+
+app.post("/founder/update-profile",function(req,resp){
+    var profilename;
+    var aadharname;
+
+    if(req.files.profilepic==null)
+    {
+        profilename=req.files.profilepic.name;
+    }
+    if(req.files.aadharpic==null)
+    {
+        aadharname=req.files.aadharpic.name;
+    }
+
+    if(req.files.profilepic!=null)
+    {
+        profilename=req.files.profilepic.name;
+        var des=process.cwd()+"/public/uploads/"+profilename;
+        req.files.profilepic.mv(des,function(err){
+            if(err)
+                console.log(err);
+            else
+            console.log("Profile pic updated successfully ");
+        })
+    }
+
+    if(req.files.aadharpic!=null)
+    {
+        aadharname=req.files.aadharpic.name;
+        var des=process.cwd()+"/public/uploads/"+aadharname;
+        req.files.aadharpic.mv(des,function(err){
+            if(err)
+                console.log(err);
+            else
+            console.log("aadhar pic updated successfully ");
+        })
+    }
+
+    dataAry=[req.body.txtname,req.body.txtcontact,req.body.txtaddress,
+        req.body.txtcity,profilename,aadharname,req.body.txtcompanies,req.body.txtestdin,
+        req.body.txtsales,req.body.txtpartner,req.body.txtevaluation,req.body.txtother , req.body.txtemail];
+
+    console.log(dataAry);
+
+    dbCtrl.query("update founderprofile set fname=?,contact=?,Address=?,City=?,Profilepic=?,Aadharpic=?,company=?,estdin=?,sales=?,partners=?,evaluation=?,Additional=?",dataAry,function(err,result){
+        if(err)
+        {
+            resp.send(err);
+        }
+        else
+        {
+            resp.send("Record updated");
+        }
+    })
+})
+
+app.get("/JSONsearchrecordfounder",function(req,resp){
+    var email=req.query.emailkuch;
+    console.log(email);
+    dbCtrl.query("select * from founderprofile where email=?",[req.body.emailkuch],function(err,result){
+        console.log(result);
+        if(err)
+            resp.send(err);
+        else
+            resp.send(result);
+    })
+})
+
+
+////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+
 
 
 

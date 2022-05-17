@@ -13,7 +13,47 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+        <script src="../JS/jquery-1.8.2.min.js"></script>
 
+        <script>
+            $(document).ready(function(){
+                $("#fetchbtn").click(function(){
+                    var email=$("#idemail").val();
+                    alert(email);
+                    var urlWithData="/JSONsearchrecordfounder?emailkuch="+email;
+
+                    $.getJSON(urlWithData,function(resp){
+                        
+                        if(resp.length==0)
+                        alert("Invalid ID");
+
+                        alert(JSON.stringify(resp));
+
+                        $("#idemail").val(resp[0].email);
+                        $("#nameid").val(resp[0].fname);
+                        $("#contactid").val(resp[0].contact);
+                        $("#addressid").val(resp[0].Address);
+                        $("#cityid").val(resp[0].City);
+                        
+    
+                        
+                        $("#proPrev").attr("src","uploads/"+resp[0].Profilepic);
+                        $("#addPrev").attr("src","uploads/"+resp[0].Aadharpic);
+                        
+                    
+                        
+                        $("#companyid").val(resp[0].company);
+                        $("#estdinid").val(resp[0].estdin);
+                        $("#salesid").val(resp[0].sales);
+                        $("#partnerid").val(resp[0].partners);
+                        $("#evaluationid").val(resp[0].evaluation);
+                        $("#additionalid").val(resp[0].Additional);
+                    })
+
+                })
+            })
+            
+        </script>
 </head>
 <body>
     <div class="Form" >
@@ -66,42 +106,42 @@
             </div>
             <!-- comapines -->
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Companies invested(approx.)</label>
-                <input type="number" id="companyid" name="txtcompanies" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <label for="exampleInputEmail1" class="form-label">Company Name</label>
+                <input type="text" id="companyid" name="txtcompanies" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
 
             <!-- estdin  -->
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Amount invested(approx.)</label>
+                <label for="exampleInputEmail1" class="form-label">esteated income  </label>
                 <input type="number" id="estdinid" name="txtestdin" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
 
             <!-- sales -->
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Amount invested(approx.)</label>
+                <label for="exampleInputEmail1" class="form-label">Sales Till Now</label>
                 <input type="number" id="salesid" name="txtsales" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
 
             <!-- partners -->
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Amount invested(approx.)</label>
+                <label for="exampleInputEmail1" class="form-label">No. of partners</label>
                 <input type="number" id="partnerid" name="txtpartner" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
             
             <!-- evaluation -->
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Amount invested(approx.)</label>
+                <label for="exampleInputEmail1" class="form-label">Total Evaluation</label>
                 <input type="number" id="evaluationid" name="txtevaluation" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
             <!-- other -->
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Other Info.</label>
+                <label for="exampleInputEmail1" class="form-label">About Your Company/idea</label>
                 <input type="text" id="additionalid" name="txtother" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
             </div>
             
         
-            <button type="submit" class="btn btn-primary" value="Save" formaction="/shark/Save-profile">Save</button>
-            <button type="submit" class="btn btn-primary" value="Update" formaction="/shark/update-profile">Update</button>
+            <button type="submit" class="btn btn-primary" value="Save" formaction="/founder/Save-profile">Save</button>
+            <button type="submit" class="btn btn-primary" value="Update" formaction="/founder/update-profile">Update</button>
             <button type="button" class="btn btn-primary" value="Fetch" id="fetchbtn" >Fetch</button>
         </form>
     </div>

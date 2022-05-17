@@ -26,13 +26,13 @@
                     alert(JSON.stringify(resp));
                     $("#idemail").val(resp[0].email);
                     $("#nameid").val(resp[0].pname);
-                    $("#idemail").val(resp[0].contact);
+                    $("#contactid").val(resp[0].contact);
                     $("#addressid").val(resp[0].Address);
                     $("#occupationid").val(resp[0].occupation);
                     $("#cityid").val(resp[0].City);
                     
-                    $("#proPrev").attr("src","public/uploads/"+resposeJSONAry[0].Profilepic);
-                    $("#addPrev").attr("src","public/uploads/"+resposeJSONAry[0].Aadharpic);
+                    $("#proPrev").attr("src","uploads/"+resp[0].Profilepic);
+                    $("#addPrev").attr("src","uploads/"+resp[0].Aadharpic);
                     
                    
                     $("#categoriesid").val(resp[0].categories);
@@ -123,7 +123,7 @@
             <!-- Amount -->
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Amount invested(approx.)</label>
-                <input type="number" id="companyid" name="txtamount" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="number" id="amountid" name="txtamount" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
             <!-- other -->
             <div class="mb-3">
