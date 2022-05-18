@@ -49,9 +49,6 @@ app.get("/founder-profile",function(req,resp){
 app.get("/shark-dashborad",function(req,resp){
     resp.sendFile(process.cwd() +"/public/HTML/sharkdashboard.html");
 })
-// app.get("/findsharks",function(req,resp){
-//     resp.sendFile(process.cwd() + "/public/HTML/angularlearn.html");
-// })
 
 app.get("/adminpanel",function(re,resp){
     resp.sendFile(process.cwd() + "/public/HTML/adminpanel.html");
@@ -63,6 +60,11 @@ app.get("/sharkfinder",function(req,resp){
 app.get("/founderfinder",function(req,resp){
     resp.sendFile(process.cwd() + "/public/HTML/findfounder.html");
 })
+
+app.get("/founder-dashboard",function(req,resp){
+    resp.sendFile(process.cwd() + "/public/HTML/founderdashboard.html");
+})
+
 
 app.get("/ajaxCheckUser",function(req,resp){
     console.log(req.query.mail);
@@ -417,6 +419,13 @@ app.get("/delete-angular",function(req,resp){
         }
     })
 })
+
+
+
+// -------------------------find the shark and founder code ----------------------------------------
+// >>>>>>>>>>>>>>>>>>>>>>>>>>----------------------------------------------------->>>>>>>>>>>>>>>>>
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 
 app.get("/getcategory",function(req,resp){
     dbCtrl.query("select DISTINCT categories from sharkprofile",function(err,result)
