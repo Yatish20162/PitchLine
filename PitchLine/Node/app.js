@@ -49,12 +49,16 @@ app.get("/founder-profile",function(req,resp){
 app.get("/shark-dashborad",function(req,resp){
     resp.sendFile(process.cwd() +"/public/HTML/sharkdashboard.html");
 })
-app.get("/findsharks",function(req,resp){
-    resp.sendFile(process.cwd() + "/public/HTML/angularlearn.html");
-})
+// app.get("/findsharks",function(req,resp){
+//     resp.sendFile(process.cwd() + "/public/HTML/angularlearn.html");
+// })
 
 app.get("/adminpanel",function(re,resp){
     resp.sendFile(process.cwd() + "/public/HTML/adminpanel.html");
+})
+
+app.get("/sharkfinder",function(req,resp){
+    resp.sendFile(process.cwd() + "/public/HTML/sharkfinder.html");
 })
 
 app.get("/ajaxCheckUser",function(req,resp){
@@ -409,6 +413,38 @@ app.get("/delete-angular",function(req,resp){
         resp.send("Deleteed");
         }
     })
+})
+
+app.get("/getcategory",function(req,resp){
+    dbCtrl.query("select DISTINCT categories from sharkprofile",function(err,result)
+    {
+        if(err)
+        resp.send(err);
+        else
+        resp.send(result);
+    })
+})
+
+app.get("/getcity",function(req,resp){
+    dbCtrl.query("select  * from sharkprofile",function(err,result)
+    {
+        if(err)
+        resp.send(err);
+        else
+        resp.send(result);
+    })
+})
+
+app.get("/getsharkcards",function(req,resp){
+    dataAry=[req.query.categorykuch,req.query.Citykuch];
+    console.log(dataAry);
+    dbCtrl.query("select * from sharkprofile where categories like %$?$% and City like %$?$% ",dataAry,function(err,result){
+        if(err)
+        resp.send(err);
+        else
+        resp.send(result);
+    })
+
 })
 
 
