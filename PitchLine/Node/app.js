@@ -53,6 +53,10 @@ app.get("/findsharks",function(req,resp){
     resp.sendFile(process.cwd() + "/public/HTML/angularlearn.html");
 })
 
+app.get("/adminpanel",function(re,resp){
+    resp.sendFile(process.cwd() + "/public/HTML/adminpanel.html");
+})
+
 app.get("/ajaxCheckUser",function(req,resp){
     console.log(req.query.mail);
     dbCtrl.query("select * from USERS where email=?",req.query.mail,function(err,result){
@@ -384,8 +388,9 @@ app.get("/JSONsearchrecordfounder",function(req,resp){
 
 
 
-app.get("/fetch-all",function(req,resp){
-    dbCtrl.query("select * from USERS ",function(err,result){
+app.get("/sharkfetchall",function(req,resp){
+
+    dbCtrl.query("select * from sharkprofile ",function(err,result){
         if(err)
         resp.send(err);
         else
