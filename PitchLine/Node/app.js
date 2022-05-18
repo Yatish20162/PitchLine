@@ -60,6 +60,9 @@ app.get("/adminpanel",function(re,resp){
 app.get("/sharkfinder",function(req,resp){
     resp.sendFile(process.cwd() + "/public/HTML/sharkfinder.html");
 })
+app.get("/founderfinder",function(req,resp){
+    resp.sendFile(process.cwd() + "/public/HTML/findfounder.html");
+})
 
 app.get("/ajaxCheckUser",function(req,resp){
     console.log(req.query.mail);
@@ -427,6 +430,25 @@ app.get("/getcategory",function(req,resp){
 
 app.get("/getcity",function(req,resp){
     dbCtrl.query("select  * from sharkprofile",function(err,result)
+    {
+        if(err)
+        resp.send(err);
+        else
+        resp.send(result);
+    })
+})
+
+app.get("/getevaluation",function(req,resp){
+    dbCtrl.query("select  * from founderprofile  ",function(err,result)
+    {
+        if(err)
+        resp.send(err);
+        else
+        resp.send(result);
+    })
+})
+app.get("/getcompany",function(req,resp){
+    dbCtrl.query("select  * from founderprofile  ",function(err,result)
     {
         if(err)
         resp.send(err);
