@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <script src="/PitchLine/Node/public/JS/angular.min.js">
+   </script>
+    <title>Document</title>
+    <script>
+        var mymodule=angular.module("kuchModule",[]);
+        //angular   and $scope are objects provided by angular
+        var controller=mymodule.controller("kuchController",function($scope){
+                $scope.doHello=function()
+                {
+                    alert("Hello");
+                }
+                $scope.fname="Real Java";
+        })
+    </script>
+</head>
+<body ng-app="kuchModule" ng-controller="kuchController">
+    <input type="button" value="Click" ng-click="doHello();">
+    <p>
+        <input type="text" ng-model="fname">
+        {{fname}}   <!-- expression -->
+
+    </p>
+    <p>
+        <input type="text" ng-model="fname">
+    </p>
+</body>
+</html>

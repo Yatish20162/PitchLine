@@ -49,6 +49,9 @@ app.get("/founder-profile",function(req,resp){
 app.get("/shark-dashborad",function(req,resp){
     resp.sendFile(process.cwd() +"/public/HTML/sharkdashboard.html");
 })
+app.get("/findsharks",function(req,resp){
+    resp.sendFile(process.cwd() + "/public/HTML/angularlearn.html");
+})
 
 app.get("/ajaxCheckUser",function(req,resp){
     console.log(req.query.mail);
@@ -381,6 +384,26 @@ app.get("/JSONsearchrecordfounder",function(req,resp){
 
 
 
+app.get("/fetch-all",function(req,resp){
+    dbCtrl.query("select * from USERS ",function(err,result){
+        if(err)
+        resp.send(err);
+        else
+        resp.send(result);
+    })
+})
 
+app.get("/delete-angular",function(req,resp){
+    dbCtrl.query("delete  from USERS where email=?",[req.query.emailkuch],function(err,result){
+        if(err)
+        resp.send(err);
+        else{
+        if(result.affectedRows==0)
+        resp.send("Invalid ID");
+        else
+        resp.send("Deleteed");
+        }
+    })
+})
 
 

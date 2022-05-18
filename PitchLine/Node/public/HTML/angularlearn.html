@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Find-Sharks</title>
+    <script src="../JS/angular.min.js">  
+    </script>
+
+    <script>
+        var mymodule=angular.module("kuchModule",[]);
+        //angular   and $scope are objects provided by angular
+        var controller=mymodule.controller("kuchController",function($scope,$http){
+                $scope.doHello=function()
+                {
+                    alert("Hello");
+                }
+            //   $scope.jsonAry=[
+            //       {uid:"aman",pwd:"raman"},
+            //       {uid:"chaman",pwd:"raman"},
+            //       {uid:"samndy",pwd:"raman"},
+            //       {uid:"68733",pwd:"raman"},
+            //   ];
+
+              $scope.doFetchAll=function(){
+                $http.get("/fetch-all").then(fxkuchgood,fxkuchbad);
+                function fxkuchgood(resp){
+                    alert(JSON.stringify(resp.data));
+                    $scope.jsonAry=resp.data;
+                }
+                function fxkuchbad(resp)
+                {
+                    alert(resp.data);
+                }
+              }
+
+              $scope.doDelete=function(email,index){
+                $http.get("/delete-angular?emailkuch=" + email).then(fxkuchgood,fxkuchbad);
+                function fxkuchgood(resp){
+                    alert(resp.data);
+                    $scope.doFetchAll();
+                }
+                function fxkuchbad(resp)
+                {
+                    alert(resp.data);
+                }
+
+              }
+        })
+    </script>
+</head>
+<body ng-app="kuchModule" ng-controller="kuchController">
+
+    <input type="button" value="Click" ng-click="doHello();">
+    
+    <p>
+        <center>
+            <h2>All Records</h2>
+            <table width="500px" border="1px">
+                <tr ng-repeat="obj in jsonAry">
+                    <td>{{$index+1}}</td>
+                    <td>{{obj.email}}</td>
+                    <td>{{obj.pwd}}</td>
+                    <td>{{obj.utype}}</td>
+                    <td>{{obj.dos}}</td>
+                    <th>
+                        <input type="button" value="Delete" ng-click="doDelete(obj.email,$index);">
+                    </th>
+                </tr> 
+            </table>
+        </center>
+    </p>
+
+    <p>
+        <input type="button"  value="Show All records from database" ng-click="doFetchAll();">
+    </p>
+</body>
+</html>
