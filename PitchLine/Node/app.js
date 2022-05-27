@@ -428,7 +428,7 @@ app.get("/delete-angular",function(req,resp){
 
 
 app.get("/getcategory",function(req,resp){
-    dbCtrl.query("select DISTINCT categories from sharkprofile",function(err,result)
+    dbCtrl.query("select * from sharkprofile",function(err,result)
     {
         if(err)
         resp.send(err);
@@ -469,13 +469,24 @@ app.get("/getcompany",function(req,resp){
 app.get("/getsharkcards",function(req,resp){
     dataAry=[req.query.categorykuch,req.query.Citykuch];
     console.log(dataAry);
-    dbCtrl.query("select * from sharkprofile where categories like %$?$% and City like %$?$% ",dataAry,function(err,result){
+    dbCtrl.query("select * from sharkprofile where company like ? and City=?",dataAry,function(err,result){
         if(err)
         resp.send(err);
         else
         resp.send(result);
     })
-
 })
+
+app.get("/getfoundercards",function(req,resp){
+    dataAry=[req.query.Companykuch,req.query.Evaluationkuch];
+    console.log(dataAry);
+    dbCtrl.query("select * from sharkprofile where categories like ? and City=?",dataAry,function(err,result){
+        if(err)
+        resp.send(err);
+        else
+        resp.send(result);
+    })
+})
+
 
 

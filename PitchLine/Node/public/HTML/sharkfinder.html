@@ -15,32 +15,47 @@
     <script>
         var mymodule = angular.module("Mymodule", []);
         var myController = mymodule.controller("Mycontroller", function ($scope, $http) {
-            $http.get("/getcategory").then(fng1, fnb1);
-            function fng1(jsonResps) {
+            // $http.get("/getcategory").then(fng1, fnb1);
+            // function fng1(jsonResps) {
 
-                var allSet = new Set();
-                $scope.jsonarry = jsonResps.data;
-                alert(JSON.stringify($scope.jsonarry));
-                //alert($scope.jsonarry.length);
+            //     var allSet = new Set();
+            //     $scope.jsonarry = jsonResps.data;
+            //     alert(JSON.stringify($scope.jsonarry));
+            //     //alert($scope.jsonarry.length);
 
-                for (i = 0; i < $scope.jsonarry.length; i++) {
-                    var ary = $scope.jsonarry[i].categories.split(",");//ret. array of strings
-                    //alert(ary.length);
-                    for (j = 0; j < ary.length; j++) {
-                        //alert(ary[j]);
-                        allSet.add(ary[j]);//a,b,c,d
-                    }
+            //     for (i = 0; i < $scope.jsonarry.length; i++) {
+            //         var ary = $scope.jsonarry[i].categories.split(",");//ret. array of strings
+            //         //alert(ary.length);
+            //         for (j = 0; j < ary.length; j++) {
+            //             //alert(ary[j]);
+            //             allSet.add(ary[j]);//a,b,c,d
+            //         }
+            //     }
+            //     $scope.cateAry = [];
+            //     for (var val of allSet) {
+            //         $scope.cateAry.push(val);//stored in array
+            //     }
+            //     //alert($scope.cateAry.length);
+            // }
+
+
+
+            // function fnb1(jsonResps) {
+            //     alert(jsonResps);
+            // }
+
+            $http.get("/getcategory").then(fng1,fnb1);
+                function fng1(jsonrsp)
+                {
+                    alert(JSON.stringify(jsonrsp));
+                    $scope.cateAry=jsonrsp.data;
                 }
-                $scope.cateAry = [];
-                for (var val of allSet) {
-                    $scope.cateAry.push(val);//stored in array
+                function fnb1(jsonrsp)
+                {
+                    alert(jsonrsp);
                 }
-                //alert($scope.cateAry.length);
-            }
 
-            function fnb1(jsonResps) {
-                alert(jsonResps);
-            }
+
 
             $http.get("/getcity").then(fng, fnb);
             function fng(jsonResp) {
@@ -52,9 +67,12 @@
                 alert(jsonResp);
             }
             
+
+            
+
             $scope.Search=function(category,City){
                 alert(category);alert(City);
-            $http.get("/getsharkcards?categorykuch=" + category + "&Citykuch=" + City).then(fngood,fnbad);
+            $http.get("/getsharkcards?categorykuch=%"+category+"%&Citykuch=" + City).then(fngood,fnbad);
             function fngood(jsonResp)
             {
                 $scope.jsonAry=jsonResp.data;
@@ -75,20 +93,20 @@
     <div>
         <div>
             <label for="inputCategory">Category</label>
-            <select id="inputCategory" class="form-control">
+            <select id="inputCategory" class="form-control" ng-model="category">
                 <option selected>Select Category</option>
-                <option value="{{str}}" ng-repeat="str in cateAry">{{str}}</option>
+                <option value="{{str.categories}}" ng-repeat="str in cateAry">{{str.categories}}</option>
             </select>
         </div>
         <div>
-            <label for="inputState">City</label>
-            <select id="inputState" class="form-control">
+            <label for="inputState" >City</label>
+            <select id="inputState" class="form-control" ng-model="City">
                 <option selected>Select city</option>
-                <option value="{{objcat.City}}" ng-repeat="objcit in jsonary">{{objcit.City}}</option>
+                <option value="{{objcit.City}}" ng-repeat="objcit in jsonary">{{objcit.City}}</option>
             </select>
         </div>
 
-        <button type="button" class="btn btn-primary" ng-click="Search();">Search</button>
+        <button type="button" class="btn btn-primary" ng-click="Search(category,City);">Search</button>
 
         <hr>
         <div class="container">
@@ -100,8 +118,8 @@
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">
                                 <img src="uploads/{{obj.Profilepic}}" width="50px" height="50px" alt="">
-                                {{obj.amount}}
-                                {{obj.companycount}}
+                                {{obj.fname}}
+                                {{obj.email}}
                             </p>
                             <button type="button" id="signupbtn" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#x">
