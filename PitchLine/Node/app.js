@@ -407,6 +407,18 @@ app.get("/sharkfetchall",function(req,resp){
     })
 })
 
+app.get("/founderfetchall",function(req,resp){
+
+    dbCtrl.query("select * from founderprofile ",function(err,result){
+        if(err)
+        resp.send(err);
+        else
+        resp.send(result);
+    })
+})
+
+
+
 app.get("/delete-angular",function(req,resp){
     dbCtrl.query("delete  from USERS where email=?",[req.query.emailkuch],function(err,result){
         if(err)

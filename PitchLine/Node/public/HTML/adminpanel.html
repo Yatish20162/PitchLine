@@ -20,8 +20,21 @@
         var mymodule = angular.module("kuchmodule", []);
         var controller = mymodule.controller("kuchcontroller", function ($scope, $http) {
 
-            $scope.LoadAll = function () {
+            $scope.LoadAllShark = function () {
                 $http.get("/sharkfetchall").then(fxkuchgood, fxkuchbad);
+                function fxkuchgood(resp) {
+                    alert(JSON.stringify(resp.data));
+                    $scope.jsonAry = resp.data;
+                }
+                function fxkuchbad(resp) {
+                    alert(resp.data);
+                }
+
+            }
+
+
+            $scope.LoadAllfounder = function () {
+                $http.get("/founderfetchall").then(fxkuchgood, fxkuchbad);
                 function fxkuchgood(resp) {
                     alert(JSON.stringify(resp.data));
                     $scope.jsonAry = resp.data;
@@ -76,7 +89,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <input type="button" value="Load All" ng-click="LoadAll();">
+                    <input type="button" value="Load All" ng-click="LoadAllShark();">
 
 
                     <h2>All Records</h2>
@@ -114,7 +127,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <input type="button" value="Load All" ng-click="LoadAll();">
+                    <input type="button" value="Load All" ng-click="LoadAllfounder();">
 
 
                     <h2>All Records</h2>
