@@ -64,19 +64,16 @@
                 $.get(urlwithdata, function (response) {
                     alert("Login cnfirmed");
                     // $("#lserversub").html(response);
-                    if(response.length==0)
-                    {
+                    if (response.length == 0) {
                         $("#lserversub").html("InValid");
                     }
-                    else if(response[0].utype=="shark")
-                    {
-                        window.localStorage.setItem("login",$("#Lmail").val());
-                        window.location.href="/HTML/sharkdashboard.html";
+                    else if (response[0].utype == "shark") {
+                        window.localStorage.setItem("login", $("#Lmail").val());
+                        window.location.href = "/HTML/sharkdashboard.html";
                     }
-                    else
-                    {
-                        window.localStorage.setItem("login",$("#Lmail").val());
-                        window.location.href="/HTML/founderdashboard.html";
+                    else {
+                        window.localStorage.setItem("login", $("#Lmail").val());
+                        window.location.href = "/HTML/founderdashboard.html";
                     }
 
                 });
@@ -130,106 +127,109 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-light bg-light">
+    <div class="container">
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <span class="navbar-brand mb-0 h1">Navbar</span>
+                <div>
+                    <button type="button" id="loginbtn" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#y">
+                        Login
+                    </button>
+                    <button type="button" id="signupbtn" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#x">
+                        Signup
+                    </button>
+                </div>
+            </div>
+        </nav>
+
         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">Navbar</span>
-            <div>
-                <button type="button" id="loginbtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#y">
-                    Login
-                </button>
-                <button type="button" id="signupbtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#x">
-                    Signup
-                </button>
-            </div>
+            <a href="/shark-dashborad">Shark dashboard</a>
+            <a href="/founder-dashboard">Founder dashboard</a>
+
+            <a href="/adminpanel"> ADMIN PANEL </a>
+
+
         </div>
-    </nav>
 
-    <div class="container-fluid">
-        <a href="/shark-dashborad">Shark dashboard</a>
-        <a href="/founder-dashboard">Founder dashboard</a>
-        
-        <a href="/adminpanel"> ADMIN PANEL </a>
-        
-       
-    </div>
+        <!-- Signup-> Modal -->
 
-    <!-- Signup-> Modal -->
+        <div class="modal fade" id="x" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <h1>SIGNUP</h1>
 
-    <div class="modal fade" id="x" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <h1>SIGNUP</h1>
+                            <p id="Server">
+                                <span class="respServer"> * </span>
+                            </p>
 
-                        <p id="Server">
-                            <span class="respServer"> * </span>
-                        </p>
+                            <p>
+                                <input type="email" placeholder="Email" id="mail">
+                                <span id="validate"> * </span>
+                            </p>
 
-                        <p>
-                            <input type="email" placeholder="Email" id="mail">
-                            <span id="validate"> * </span>
-                        </p>
+                            <p>
+                                <input type="password" placeholder="Password" id="pwd">
+                                <!-- <span id="errPwd">*</span> -->
+                            </p>
 
-                        <p>
-                            <input type="password" placeholder="Password" id="pwd">
-                            <!-- <span id="errPwd">*</span> -->
-                        </p>
+                            <select id="tp">
+                                <option value="shark">Shark</option>
+                                <option value="founder">Founder</option>
+                            </select>
+                            <p>
+                                <input type="button" value="Signup" id="Sbtn">
+                                <span id="sreversub">*</span>
+                            </p>
 
-                        <select id="tp">
-                            <option value="shark">Shark</option>
-                            <option value="founder">Founder</option>
-                        </select>
-                        <p>
-                            <input type="button" value="Signup" id="Sbtn">
-                            <span id="sreversub">*</span>
-                        </p>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
 
-    <!-- Login-> Modal -->
-    <div class="modal fade" id="y" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <h1>Login</h1>
-                        <input type="email" placeholder="Email" id="Lmail">
-                        <input type="password" placeholder="Password" id="Lpwd">
-                        <p>
-                            <input type="button" value="Login" id="Lbtn">
-                            <span id="lserversub">*</span>
-                        </p>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <!-- Login-> Modal -->
+        <div class="modal fade" id="y" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <h1>Login</h1>
+                            <input type="email" placeholder="Email" id="Lmail">
+                            <input type="password" placeholder="Password" id="Lpwd">
+                            <p>
+                                <input type="button" value="Login" id="Lbtn">
+                                <span id="lserversub">*</span>
+                            </p>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 </body>
 
 </html>

@@ -12,6 +12,9 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
     <script src="../JS/angular.min.js"></script>
+
+    
+
     <script>
         var mymodule = angular.module("Mymodule", []);
         var myController = mymodule.controller("Mycontroller", function ($scope, $http) {
@@ -44,16 +47,14 @@
             //     alert(jsonResps);
             // }
 
-            $http.get("/getcategory").then(fng1,fnb1);
-                function fng1(jsonrsp)
-                {
-                    alert(JSON.stringify(jsonrsp));
-                    $scope.cateAry=jsonrsp.data;
-                }
-                function fnb1(jsonrsp)
-                {
-                    alert(jsonrsp);
-                }
+            $http.get("/getcategory").then(fng1, fnb1);
+            function fng1(jsonrsp) {
+                alert(JSON.stringify(jsonrsp));
+                $scope.cateAry = jsonrsp.data;
+            }
+            function fnb1(jsonrsp) {
+                alert(jsonrsp);
+            }
 
 
 
@@ -66,91 +67,95 @@
             function fnb(jsonResp) {
                 alert(jsonResp);
             }
-            
 
-            
 
-            $scope.Search=function(category,City){
-                alert(category);alert(City);
-            $http.get("/getsharkcards?categorykuch=%"+category+"%&Citykuch=" + City).then(fngood,fnbad);
-            function fngood(jsonResp)
-            {
-                $scope.jsonAry=jsonResp.data;
-                alert(JSON.stringify($scope.jsonAry));
+
+
+            $scope.Search = function (category, City) {
+                alert(category); alert(City);
+                $http.get("/getsharkcards?categorykuch=%" + category + "%&Citykuch=" + City).then(fngood, fnbad);
+                function fngood(jsonResp) {
+                    $scope.jsonAry = jsonResp.data;
+                    alert(JSON.stringify($scope.jsonAry));
+                }
+                function fnbad(jsonResp) {
+                    alert(jsonResp);
+                }
             }
-            function fnbad(jsonResp)
-            {
-                alert(jsonResp);
-            }
-        }
         })
     </script>
 </head>
 
 <body ng-app="Mymodule" ng-controller="Mycontroller">
-    <div>
-        <div>
-            <label for="inputCategory">Category</label>
-            <select id="inputCategory" class="form-control" ng-model="category">
-                <option selected>Select Category</option>
-                <option value="{{str.categories}}" ng-repeat="str in cateAry">{{str.categories}}</option>
-            </select>
-        </div>
-        <div>
-            <label for="inputState" >City</label>
-            <select id="inputState" class="form-control" ng-model="City">
-                <option selected>Select city</option>
-                <option value="{{objcit.City}}" ng-repeat="objcit in jsonary">{{objcit.City}}</option>
-            </select>
-        </div>
+    <div class="container">
 
-        <button type="button" class="btn btn-primary" ng-click="Search(category,City);">Search</button>
+        <div class="row mt-3">
+
+            <div class="col-md-6">
+                <label for="inputCategory">Category</label>
+                <select id="inputCategory" class="form-control" ng-model="category">
+                    <option selected>Select Category</option>
+                    <option value="{{str.categories}}" ng-repeat="str in cateAry">{{str.categories}}</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="inputState">City</label>
+                <select id="inputState" class="form-control" ng-model="City">
+                    <option selected>Select city</option>
+                    <option value="{{objcit.City}}" ng-repeat="objcit in jsonary">{{objcit.City}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-12 text-center">
+                <button type="button" class="btn btn-primary" ng-click="Search(category,City);">Search</button>
+            </div>
+        </div>
 
         <hr>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3" ng-repeat="obj in jsonAry">
-                    <div class="card" style="width: 18rem;">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">
-                                <img src="uploads/{{obj.Profilepic}}" width="50px" height="50px" alt="">
-                                {{obj.fname}}
-                                {{obj.email}}
-                            </p>
-                            <button type="button" id="signupbtn" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#x">
-                                Know More
-                            </button>
-                            <div class="modal fade" id="x" data-bs-backdrop="static" data-bs-keyboard="false"
-                                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            {{obj.email}} <br>
-                                            {{obj.pname}} <br>
-                                            {{obj.contact}} <br><br>
-                                            {{obj.Address}} <br>
-                                            {{obj.occupation}}<br>
-                                            {{obj.City}} <br>
-                                            {{obj.Profilepic}}<br> 
-                                            {{obj.Aadharpic}}<br>
-                                            {{obj.categories}}<br>
-                                            {{obj.companycount}}<br>
-                                            {{obj.amount}}<br>
-                                            {{obj.Additional}}<br> 
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
+        <div class="row">
+            <div class="col-md-3" ng-repeat="obj in jsonAry">
+                <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">
+                            <img src="uploads/{{obj.Profilepic}}" width="50px" height="50px" alt="">
+                            {{obj.fname}}
+                            {{obj.email}}
+                        </p>
+                        <button type="button" id="signupbtn" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#x">
+                            Know More
+                        </button>
+                        <div class="modal fade" id="x" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{obj.email}} <br>
+                                        {{obj.pname}} <br>
+                                        {{obj.contact}} <br><br>
+                                        {{obj.Address}} <br>
+                                        {{obj.occupation}}<br>
+                                        {{obj.City}} <br>
+                                        {{obj.Profilepic}}<br>
+                                        {{obj.Aadharpic}}<br>
+                                        {{obj.categories}}<br>
+                                        {{obj.companycount}}<br>
+                                        {{obj.amount}}<br>
+                                        {{obj.Additional}}<br>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
 
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -159,6 +164,7 @@
                 </div>
             </div>
         </div>
+
 
     </div>
 </body>

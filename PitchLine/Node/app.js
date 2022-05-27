@@ -375,7 +375,7 @@ app.post("/founder/update-profile",function(req,resp){
 app.get("/JSONsearchrecordfounder",function(req,resp){
     var email=req.query.emailkuch;
     console.log(email);
-    dbCtrl.query("select * from founderprofile where email=?",[req.body.emailkuch],function(err,result){
+    dbCtrl.query("select * from founderprofile where email=?",[email],function(err,result){
         console.log(result);
         if(err)
             resp.send(err);
