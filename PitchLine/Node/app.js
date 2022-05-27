@@ -103,14 +103,7 @@ app.get("/loginajax",function(req,resp){
         if(err)
         resp.send(err);
         else
-        if(result.length==0)
-        {
-            resp.send("Invalid ID");
-        }
-        else
-        {
-            resp.send(" Login Succefull ");
-        }
+        resp.send(result)
     })
 })
 
@@ -492,7 +485,7 @@ app.get("/getsharkcards",function(req,resp){
 app.get("/getfoundercards",function(req,resp){
     dataAry=[req.query.Companykuch,req.query.Evaluationkuch];
     console.log(dataAry);
-    dbCtrl.query("select * from sharkprofile where categories like ? and City=?",dataAry,function(err,result){
+    dbCtrl.query("select * from founderprofile where company=? and evaluation=?",dataAry,function(err,result){
         if(err)
         resp.send(err);
         else

@@ -64,7 +64,7 @@
             
             $scope.Search=function(Company,Evaluation){
                 alert(Company);alert(Evaluation);
-            $http.get("/getfoundercards?Companykuch=%" + Company + "%&Evaluationkuch=" + Evaluation).then(fngood,fnbad);
+            $http.get("/getfoundercards?Companykuch=" + Company + "&Evaluationkuch=" + Evaluation).then(fngood,fnbad);
             function fngood(jsonResp)
             {
                 $scope.jsonAry=jsonResp.data;
@@ -85,14 +85,14 @@
     <div>
         <div>
             <label for="inputCategory">Company</label>
-            <select id="inputCategory" class="form-control" ng-modal="Cmp">
+            <select id="inputCategory" class="form-control" ng-model="Cmp">
                 <option selected>Select Company</option>
                 <option value="{{str.company}}" ng-repeat="str in cateAry">{{str.company}}</option>
             </select>
         </div>
         <div>
             <label for="inputState">Evaluation</label>
-            <select id="inputState" class="form-control" ng-modal="Eval">
+            <select id="inputState" class="form-control" ng-model="Eval">
                 <option selected>Select evaluation</option>
                 <option value="{{objval.evaluation}}" ng-repeat="objval in jsonary">{{objval.evaluation}}</option>
             </select>

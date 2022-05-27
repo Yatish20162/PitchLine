@@ -13,6 +13,9 @@
 
     <script>
         $(document).ready(function(){
+
+            document.getElementById("idemail").value=localStorage.getItem("login");
+
             $("#fetchbtn").click(function(){
                 var email=$("#idemail").val();
                 alert(email);

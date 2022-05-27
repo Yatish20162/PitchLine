@@ -63,8 +63,28 @@
                 var urlwithdata = "/loginajax?emailkuch=" + email + "&pwdkuch=" + pwd;
                 $.get(urlwithdata, function (response) {
                     alert("Login cnfirmed");
-                    $("#lserversub").html(response);
+                    // $("#lserversub").html(response);
+                    if(response.length==0)
+                    {
+                        $("#lserversub").html("InValid");
+                    }
+                    else if(response[0].utype=="shark")
+                    {
+                        window.localStorage.setItem("login",$("#Lmail").val());
+                        window.location.href="/HTML/sharkdashboard.html";
+                    }
+                    else
+                    {
+                        window.localStorage.setItem("login",$("#Lmail").val());
+                        window.location.href="/HTML/founderdashboard.html";
+                    }
+
                 });
+
+
+
+
+
             });
 
             // validations on Email---------------------------------------

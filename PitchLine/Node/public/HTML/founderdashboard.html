@@ -14,9 +14,19 @@
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
 
+    <script>
+        function checkUser()
+            {
+                alert(localStorage.getItem("login"));
+                if(localStorage.getItem("login")==null)
+                {
+                    location.href="index.html";
+                }
+            }
+    </script>
 </head>
 
-<body>
+<body onload="checkUser();">
     <div class="card" style="width: 18rem;">
         <div class="card-body">
             <a href="/founder-profile" class="card-link">Founder  profile</a>
